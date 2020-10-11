@@ -1,36 +1,49 @@
 package com.codepath.apps.restclienttemplate;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.codepath.apps.restclienttemplate.models.Tweet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONException;
+import java.util.ArrayList;
+import org.json.JSONArray;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.codepath.apps.restclienttemplate.models.Tweet;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
+import okhttp3.Headers;
 import java.util.List;
 
-import okhttp3.Headers;
-
 public class TimelineActivity extends AppCompatActivity {
+
+
   public static final String TAG = "TimelineActivity";
   TwitterClient client;
   RecyclerView rvTweets;
   List<Tweet> tweets;
   TweetsAdapter adapter;
-
+  SwipeRefreshLayout swipeContainer;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_timeline);
     client = TwitterApp.getRestClient(this);
+
+    swipeContainer = findViewById(R.id.swipeContainer);
+    // Configure the refreshing colors
+    swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light);
+    // Adding Listener
+    swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      @Override
+      public void onRefresh() {
+        Log.i(TAG, "fetching new data!");
+      }
+    });
+
     // Find the recycler view
     rvTweets = findViewById(R.id.rvTweets);
 
@@ -50,8 +63,10 @@ public class TimelineActivity extends AppCompatActivity {
         Log.i(TAG, "onSuccess!" + json.toString());
         JSONArray jsonArray = json.jsonArray;
         try {
-          tweets.addAll(Tweet.fromJsonArray(jsonArray));
-          adapter.notifyDataSetChanged();
+          adapter.clear();
+          adapter.addAll(Tweet.fromJsonArray(jsonArray));
+          // Now we call setRefreshing to signal refresh has finished
+          swipeContainer.setRefreshing(false);
         } catch (JSONException e) {
           Log.e(TAG, "Json exception", e);
           e.printStackTrace();

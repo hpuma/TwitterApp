@@ -1,18 +1,15 @@
 package com.codepath.apps.restclienttemplate;
 
-import android.content.Context;
+import com.codepath.apps.restclienttemplate.models.Tweet;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import com.bumptech.glide.Glide;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.codepath.apps.restclienttemplate.models.Tweet;
-
+import android.content.Context;
+import android.view.ViewGroup;
+import android.view.View;
 import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
@@ -40,10 +37,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     // Bind the tweet with view holder
     holder.bind(tweet);
   }
-
   @Override
   public int getItemCount() {
     return tweets.size();
+  }
+  // Clean all elements of the recycler
+  public void clear() {
+    tweets.clear();
+    notifyDataSetChanged();
+  }
+  // Add a list of items -- change to type used
+  public void addAll(List<Tweet> tweetList) {
+    tweets.addAll(tweetList);
+    notifyDataSetChanged();
   }
 
   // Bind values based on the position of the element
@@ -59,7 +65,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
       this.tvBody = itemView.findViewById(R.id.tvBody);
       this.tvScreenName = itemView.findViewById(R.id.tvScreenName);
     }
-
     public void bind(Tweet tweet) {
       tvBody.setText(tweet.body);
       tvScreenName.setText(tweet.user.screenName);
