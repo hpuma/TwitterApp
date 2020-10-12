@@ -34,18 +34,22 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-
 This gif demonstrates that the app can launch and run with no problems:
 
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-This gif demtrates that the app is compatible with horizontal mode:
+<img src='overview' width='50' />
 
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+This gif demonstrates the successful implementation of refresh wheel:
+
+
+<img src='refresh_wheel.gif' width='50'  />
+
+
+This gif demonstrates that the app is compatible with horizontal mode:
+
+
+<img src='horizontal_view.gif' width='100' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
