@@ -23,6 +23,7 @@ public class TimelineActivity extends AppCompatActivity {
   List<Tweet> tweets;
   TweetsAdapter adapter;
   SwipeRefreshLayout swipeContainer;
+  EndlessRecyclerViewScrollListener scrollListener;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,45 @@ public class TimelineActivity extends AppCompatActivity {
 
     tweets = new ArrayList<>();
     adapter = new TweetsAdapter(this, tweets);
-
+    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
     // Recycler view setup: layout manager and the adapter
     rvTweets.setLayoutManager(new LinearLayoutManager(this));
     rvTweets.setAdapter(adapter);
+
+    scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+      @Override
+      public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+        Log.i(TAG, "onLoadMore" + page);
+        loadMoreData();
+      }
+    };
+
+    // Adding scroll listener to RecyclerView
+    rvTweets.addOnScrollListener(scrollListener);
+
+
     populateHomeTimeline();
   }
+  private void loadMoreData() {
+    client.getNextPageOfTweets(new JsonHttpResponseHandler() {
+      @Override
+      public void onSuccess(int statusCode, Headers headers, JSON json) {
+        Log.i(TAG, "onSuccess for load more data" + json.toString());
+        JSONArray jsonArray = json.jsonArray;
+        try {
+          List<Tweet> tweets = Tweet.fromJsonArray(jsonArray);
+          adapter.addAll(tweets);
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+      }
+      @Override
+      public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+        Log.i(TAG, "onFailure for loadMoreData!", throwable);
+      }
+  }, tweets.get(tweets.size()+-1).id);
 
+  }
   private void populateHomeTimeline() {
     client.getHomeTimeline(new JsonHttpResponseHandler() {
       @Override
