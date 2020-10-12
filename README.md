@@ -57,7 +57,10 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+- Understanding adapter implementation was a bit of an obstacle.
+- Getting used to the type casting, it seems a bit weird.
+- I did have fun implementing the API and seeing it work.
+- 
 
 ## Open-source libraries used
 
