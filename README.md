@@ -37,19 +37,21 @@ Here's a walkthrough of implemented user stories:
 This gif demonstrates that the app can launch and run with no problems:
 
 
-<img src='overview.gif' width='50'  />
+<img src='overview.gif' width='200'  />
 
 
 This gif demonstrates the successful implementation of refresh wheel:
 
 
-<img src='refresh_wheel.gif' width='50'  />
+<img src='refresh_wheel.gif' width='200'  />
 
 
 This gif demonstrates that the app is compatible with horizontal mode:
 
 
-<img src='horizontal_view.gif' width='100'  />
+<img src='horizontal_view.gif' height='100  />
+
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
