@@ -49,7 +49,7 @@ This gif demonstrates the successful implementation of refresh wheel:
 This gif demonstrates that the app is compatible with horizontal mode:
 
 
-<img src='horizontal_view.gif' height='100  />
+<img src='horizontal_view.gif' height='200'  />
 
 
 
