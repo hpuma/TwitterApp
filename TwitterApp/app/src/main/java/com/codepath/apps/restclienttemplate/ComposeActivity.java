@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import okhttp3.Headers;
 
@@ -55,6 +57,12 @@ public class ComposeActivity extends AppCompatActivity {
             try {
               Tweet tweet = Tweet.fromJson(json.jsonObject);
               Log.i(TAG, "Published tweet says:" + tweet.body);
+              Intent intent = new Intent();
+              intent.putExtra("tweet", Parcels.wrap(tweet));
+              setResult(RESULT_OK, intent);
+              // Closing the activity, passing data to parent
+              finish();
+
             } catch (JSONException e) {
               e.printStackTrace();
             }

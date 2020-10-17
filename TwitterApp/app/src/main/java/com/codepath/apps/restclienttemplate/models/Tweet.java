@@ -1,17 +1,21 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
-import org.json.JSONArray;
-import java.util.List;
+import org.parceler.Parcel;
 
+import java.util.ArrayList;
+import java.util.List;
+@Parcel
 public class Tweet {
   public String body;
   public String createdAt;
   public long id;
   public User user;
 
+  // Parceler needs an empty constructor
+  public Tweet(){}
   public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
     Tweet tweet = new Tweet();
     tweet.body = jsonObject.getString("text");
