@@ -1,21 +1,44 @@
 package com.codepath.apps.restclienttemplate;
 
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.codepath.apps.restclienttemplate.models.Tweet;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.app.AppCompatActivity;
-import org.json.JSONException;
-import java.util.ArrayList;
-import org.json.JSONArray;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import okhttp3.Headers;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class TimelineActivity extends AppCompatActivity {
+import okhttp3.Headers;
 
+public class TimelineActivity extends AppCompatActivity {
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    // Compose icon has been selected.
+    if(item.getItemId() == R.id.compose){
+      Intent intent = new Intent(this, ComposeActivity.class);
+      startActivity(intent);
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
 
   public static final String TAG = "TimelineActivity";
   TwitterClient client;
