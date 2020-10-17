@@ -93,6 +93,28 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 
+This gif demonstrates that the app can launch and run with no problems:
+
+
+<img src='overviewPart2.gif' width='200'  />
+
+
+This gif demonstrates the successful implementation of the text counter/limit behavior:
+
+
+<img src='textLimitUpdate.gif' width='200'  />
+
+
+This gif demonstrates that the app is compatible with horizontal mode:
+
+
+<img src='horizontalPart2.gif' height='200'  />
+
+
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+
 
 
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
@@ -104,7 +126,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 - Understanding adapter implementation was a bit of an obstacle.
 - Getting used to the type casting, it seems a bit weird.
 - I did have fun implementing the API and seeing it work.
-- 
+- I am a lot better at navigating the enviornment than 2 weeks ago!
+- Having issues updating project when reopening after a while :/
 
 ## Open-source libraries used
 
